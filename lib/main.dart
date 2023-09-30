@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_forwards/pages/signup/ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import 'pages/admin/ui.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,10 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(
-        color: Colors.white,
-        child: AdminPage(),
-      ),
+      home: const SignupPage(),
     );
   }
 }
