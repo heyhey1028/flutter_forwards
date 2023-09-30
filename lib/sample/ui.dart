@@ -21,7 +21,7 @@ class SamplePageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final changeNotifier = context.read<SamplePageChangeNotifier>();
-    final count = context.select((SamplePageChangeNotifier value) => value.count);
+    final count = context.select((SamplePageChangeNotifier value) => value.state.count);
 
     return Scaffold(
       appBar: AppBar(

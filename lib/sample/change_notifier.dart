@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 
+import 'ui_state.dart';
+
 class SamplePageChangeNotifier extends ChangeNotifier {
-  var count = 0;
+  SamplePageUiState _uiState = const SamplePageUiState();
+
+  SamplePageUiState get uiState => _uiState;
 
   void increment() {
-    count++;
+    _uiState = _uiState.copyWith(count: _uiState.count + 1);
     notifyListeners();
   }
 }
-
