@@ -8,7 +8,7 @@ const saveScreenTime = (obj) => {
        "user_id": "c5ef7315-ee00-42f0-b942-b4a92a1aaba7",
        "date": obj.date,
        "screen_time": obj.minutes,
-       "service_id": "73c89c17-a35e-40bc-a399-748604e31b98"
+       "service_id": "6a4e5692-33da-4801-a7cd-ebaf26decdf5"
    }
   const method = "POST";
   const body = JSON.stringify(object);
