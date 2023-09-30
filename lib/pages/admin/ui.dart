@@ -11,50 +11,60 @@ class AdminPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Admin Page'),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: ColorUtil.colorFromHex("32C864"),
-        ),
-        child: SizedBox(
-          width: 326,
-          height: 326,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 12,
-              ),
-              const Text(
-                "チームスコア",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ColorUtil.colorFromHex("32C864"),
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AppDonutChart(
-                    amount: 100,
-                    value: 80,
-                    color: ColorUtil.colorFromHex("FAFA7D"),
+                child: SizedBox(
+                  width: 326,
+                  height: 326,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      const Text(
+                        "チームスコア",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AppDonutChart(
+                            amount: 100,
+                            value: 80,
+                            color: ColorUtil.colorFromHex("FAFA7D"),
+                          ),
+                        ],
+                      ),
+                      const Text(
+                        "とてもいい状態ですね！",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              const Text(
-                "とてもいい状態ですね！",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 12,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
