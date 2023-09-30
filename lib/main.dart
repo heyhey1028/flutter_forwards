@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -26,35 +27,45 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePageChangeNotifier extends ChangeNotifier {
+  // TODO freezed 使いますか？
+  var count = 0;
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  void increment() {
+    count++;
+    notifyListeners();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyHomePageChangeNotifier(),
+      child: const MyHomePageView(),
+    );
+  }
+}
+
+class MyHomePageView extends StatelessWidget {
+  const MyHomePageView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final changeNotifier = context.read<MyHomePageChangeNotifier>();
+    final count = context.select((MyHomePageChangeNotifier value) => value.count);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("title"),
       ),
       body: Center(
         child: Column(
@@ -64,14 +75,14 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '$count',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => changeNotifier.increment(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
