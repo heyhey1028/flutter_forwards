@@ -6,13 +6,18 @@
     {
       "matches": ["https://app.abceed.com/*"],
       "css": ["style.css"],
-      "js": ["content.js"]
+      "js": ["abceed.js"]
+    },
+    {
+      "matches": ["https://nativecamp.net/*"],
+      "js": ["native_camp.js"]
     }
   ],
   "permissions": [
     "activeTab",
     "storage",
-    "https://app.abceed.com/analysis/timeBook/ask_deru1000"
+    "https://app.abceed.com/analysis/timeBook/ask_deru1000",
+    "https://nativecamp.net/lesson-history"
   ],
   "manifest_version": 3
 }
