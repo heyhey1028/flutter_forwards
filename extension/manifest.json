@@ -1,0 +1,18 @@
+{
+  "name": "オリジナル入力チェック",
+  "version": "1.0",
+  "description": "必須チェックを追加する。",
+  "content_scripts": [
+    {
+      "matches": ["https://app.abceed.com/*"],
+      "css": ["style.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://app.abceed.com/analysis/timeBook/ask_deru1000"
+  ],
+  "manifest_version": 3
+}
