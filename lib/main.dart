@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -38,18 +38,18 @@ class MyHomePageChangeNotifier extends ChangeNotifier {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MyHomePageChangeNotifier(),
-      child: MyHomePageView(),
+      child: const MyHomePageView(),
     );
   }
-
 }
 
 class MyHomePageView extends StatelessWidget {
-
   const MyHomePageView({super.key});
 
   @override
