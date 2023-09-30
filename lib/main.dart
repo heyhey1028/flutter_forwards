@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_forwards/pages/admin/ui.dart';
 import 'package:flutter_forwards/pages/signup/ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const AdminPage(),
+      home: const SignupPage(),
     );
   }
 }
