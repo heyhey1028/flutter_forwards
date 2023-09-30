@@ -15,12 +15,16 @@ dependencies:
   supabase_flutter: ^1.10.18
   provider: ^6.0.5
   flutter_dotenv: ^5.1.0
+  freezed_annotation: ^2.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+  freezed: ^2.4.3
+  build_runner: ^2.4.6
 
 flutter:  
   uses-material-design: true
