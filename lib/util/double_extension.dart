@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_forwards/util/color.dart';
 
-extension doubleExtension on double {
+extension DoubleExtension on double {
   Color toDegreeColor() {
     String hex;
     if (this < 0.2) {
