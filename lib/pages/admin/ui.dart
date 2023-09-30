@@ -68,84 +68,84 @@ class AdminPage extends StatelessWidget {
                 ),
               ],
             ),
-            Wrap(
+            const Wrap(
               runSpacing: 24,
               spacing: 24,
               children: [
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.1,
+                  achievementRatio: 0.1,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.2,
+                  achievementRatio: 0.2,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.3,
+                  achievementRatio: 0.3,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.4,
+                  achievementRatio: 0.4,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.5,
+                  achievementRatio: 0.5,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.6,
+                  achievementRatio: 0.6,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.7,
+                  achievementRatio: 0.7,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.8,
+                  achievementRatio: 0.8,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 0.9,
+                  achievementRatio: 0.9,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.0,
+                  achievementRatio: 1.0,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.1,
+                  achievementRatio: 1.1,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.2,
+                  achievementRatio: 1.2,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.3,
+                  achievementRatio: 1.3,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.4,
+                  achievementRatio: 1.4,
                 ),
-                _individualCard(
+                _IndividualCard(
                   name: "ぼたもち",
                   progressText: "55時間",
-                  archivementRatio: 1.5,
+                  achievementRatio: 1.5,
                 ),
               ],
             ),
@@ -156,12 +156,12 @@ class AdminPage extends StatelessWidget {
   }
 }
 
-class _individualCard extends StatelessWidget {
-  _individualCard({super.key, required this.name, required this.progressText, required this.archivementRatio});
+class _IndividualCard extends StatelessWidget {
+  const _IndividualCard({required this.name, required this.progressText, required this.achievementRatio});
 
   final String name;
   final String progressText;
-  final double archivementRatio;
+  final double achievementRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -216,12 +216,12 @@ class _individualCard extends StatelessWidget {
             Positioned(
               left: 96,
               top: 48,
-              width: min(200 * archivementRatio, 200),
+              width: min(200 * achievementRatio, 200),
               bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: archivementRatio.toDegreeColor(),
+                  color: achievementRatio.toDegreeColor(),
                 ),
               ),
             ),
