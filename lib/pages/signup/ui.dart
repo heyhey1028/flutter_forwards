@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forwards/pages/home/ui.dart';
 import 'package:flutter_forwards/pages/signin/ui.dart';
@@ -17,14 +18,14 @@ class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
   final bool _isLoading = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -51,6 +52,17 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(
                     children: [
                       AppTextFormField(
+                        controller: _nameController,
+                        labelText: 'Name',
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Name is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      AppTextFormField(
                         controller: _emailController,
                         labelText: 'Email address',
                         validator: (value) {
@@ -72,18 +84,6 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 24),
-                      AppTextFormField(
-                        controller: _confirmPasswordController,
-                        labelText: 'Confirm Password',
-                        obscureText: true,
-                        validator: (value) {
-                          if (value != _passwordController.text) {
-                            return 'Password does not match';
-                          }
-                          return null;
-                        },
-                      ),
                     ],
                   ),
                 ),
@@ -95,9 +95,14 @@ class _SignupPageState extends State<SignupPage> {
                     // バリデーションエラーがある場合、処理を中断
                     if (!_formKey.currentState!.validate()) return;
 
+                    // webの場合は管理者権限で登録
+                    const role = kIsWeb ? 'admin' : 'user';
+
                     final result = await AuthRepository.signUp(
+                      name: _nameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,
+                      role: role,
                     );
 
                     if (!result) return;
