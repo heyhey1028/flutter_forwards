@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Supabase.initialize(
-    url: 'https://<your_project_id>.supabase.co',
-    anonKey: '<your_anon_key>',
+  await dotenv.load(fileName: '.env');
+  final String anonKey = dotenv.env['SUPABASE_ANON'] ?? ''; // Anon keyを.envから取得
+  final String projectUrl = dotenv.env['SUPABASE_URL'] ?? ''; // URLを.envから取得
+
+  await Supabase.initialize(
+    anonKey: anonKey, // プロジェクトAnon key
+    url: projectUrl, // プロジェクトURL
   );
   runApp(const MyApp());
 }
