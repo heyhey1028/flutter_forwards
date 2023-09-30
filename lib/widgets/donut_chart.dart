@@ -11,13 +11,10 @@ class AppDonutChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: 240,
+      height: 240,
       child: Stack(
         children: [
-          Positioned(
-            child: Container(
-              color: Colors.black,
-            ),
-          ),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,20 +43,20 @@ class AppDonutChart extends StatelessWidget {
               startDegreeOffset: 270,
               sections: [
                 PieChartSectionData(
-                  color: Colors.blue, // TODO: color map
+                  color: color, // TODO: color map
                   value: value.toDouble(),
                   title: "",
-                  radius: 30,
+                  radius: 20,
                 ),
                 PieChartSectionData(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   value: (amount - value).toDouble(),
                   title: "",
-                  radius: 30,
+                  radius: 20,
                 ),
               ],
               sectionsSpace: 0,
-              centerSpaceRadius: 120,
+              centerSpaceRadius: 90,
             ),
           ),
         ],
