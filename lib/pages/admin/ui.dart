@@ -22,16 +22,16 @@ class AdminPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: ColorUtil.colorFromHex("32C864"),
                 ),
-                child: SizedBox(
+                child: const SizedBox(
                   width: 326,
                   height: 326,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: 12,
                       ),
-                      const Text(
+                      Text(
                         "チームスコア",
                         style: TextStyle(
                           color: Colors.white,
@@ -44,18 +44,18 @@ class AdminPage extends StatelessWidget {
                           AppDonutChart(
                             amount: 100,
                             value: 80,
-                            color: ColorUtil.colorFromHex("FAFA7D"),
+                            color: Colors.white,
                           ),
                         ],
                       ),
-                      const Text(
+                      Text(
                         "とてもいい状態ですね！",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 12,
                       ),
                     ],
