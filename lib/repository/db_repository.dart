@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_forwards/models/app_user.dart';
 import 'package:flutter_forwards/models/user_achievement.dart';
+import 'package:flutter_forwards/models/total_sum.dart';
 import 'package:flutter_forwards/models/user_sum.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +20,9 @@ class DBrepository {
       final response = await _instance.from('users').select().eq('id', id);
       return AppUser.fromJson(response.first as Map<String, dynamic>);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     return null;
   }
@@ -37,7 +40,9 @@ class DBrepository {
       final List<dynamic> list = data['data'];
       return list.map((e) => ServiceStatus.fromJson(e)).toList();
     } catch (e) {
-      print('error: ${e.toString()}');
+      if (kDebugMode) {
+        print('error: ${e.toString()}');
+      }
       return [];
     }
   }
@@ -76,8 +81,27 @@ class DBrepository {
       sums.sort((a, b) => a.sum.compareTo(b.sum));
       return sums;
     } catch (e) {
-      print('error: ${e.toString()}');
+      if (kDebugMode) {
+        print('error: ${e.toString()}');
+      }
       return [];
+    }
+  }
+
+  static Future<TotalSum?> getTotalSums() async {
+    final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/total-screen-times');
+    final requestHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $anonKey',
+    };
+    try {
+      final response = await http.get(uri, headers: requestHeader);
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      final List<dynamic> list = data['data'];
+      return TotalSum.fromJson(list.first);
+    } catch (e) {
+      return null;
     }
   }
 }
