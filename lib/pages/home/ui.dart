@@ -66,6 +66,7 @@ class HomePageView extends StatelessWidget {
             const Expanded(
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     HomeMainContent(),
                     HomeSubContent(),
