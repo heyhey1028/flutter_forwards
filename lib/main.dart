@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_forwards/pages/admin/ui.dart';
 import 'package:flutter_forwards/pages/signup/ui.dart';
 import 'package:flutter_forwards/util/app_http_overrides.dart';
 import 'package:flutter/foundation.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           );
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Manabi Forward WE',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF32C864)),
         useMaterial3: true,
