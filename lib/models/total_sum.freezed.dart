@@ -20,11 +20,10 @@ TotalSum _$TotalSumFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TotalSum {
-// sum
   @JsonKey(name: "total_team_screen_times")
-  int get totalTeamScreenTimes => throw _privateConstructorUsedError; // sum
+  int get totalTeamScreenTimes => throw _privateConstructorUsedError;
   @JsonKey(name: "team_member_count")
-  int get teamMemberCount => throw _privateConstructorUsedError; // sum
+  int get teamMemberCount => throw _privateConstructorUsedError;
   @JsonKey(name: "monthly_target")
   int get monthlyTarget => throw _privateConstructorUsedError;
 
@@ -137,15 +136,12 @@ class _$TotalSumImpl implements _TotalSum {
   factory _$TotalSumImpl.fromJson(Map<String, dynamic> json) =>
       _$$TotalSumImplFromJson(json);
 
-// sum
   @override
   @JsonKey(name: "total_team_screen_times")
   final int totalTeamScreenTimes;
-// sum
   @override
   @JsonKey(name: "team_member_count")
   final int teamMemberCount;
-// sum
   @override
   @JsonKey(name: "monthly_target")
   final int monthlyTarget;
@@ -198,13 +194,13 @@ abstract class _TotalSum implements TotalSum {
   factory _TotalSum.fromJson(Map<String, dynamic> json) =
       _$TotalSumImpl.fromJson;
 
-  @override // sum
+  @override
   @JsonKey(name: "total_team_screen_times")
   int get totalTeamScreenTimes;
-  @override // sum
+  @override
   @JsonKey(name: "team_member_count")
   int get teamMemberCount;
-  @override // sum
+  @override
   @JsonKey(name: "monthly_target")
   int get monthlyTarget;
   @override

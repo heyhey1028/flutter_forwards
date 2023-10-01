@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forwards/pages/home/change_notifier.dart';
 import 'package:flutter_forwards/pages/home/components/home_main_content.dart';
 import 'package:flutter_forwards/pages/home/components/home_sub_content.dart';
-import 'package:flutter_forwards/repository/auth_repository.dart';
 import 'package:flutter_forwards/repository/db_repository.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +13,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = AuthRepository.user;
+    const user = kIsWeb ? 'ecd32456-6527-4ef1-add2-39ba9e14e66b' : 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7';
 
     return FutureBuilder(
       future: Future.wait([
-        DBrepository.getUser('c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
-        DBrepository.getServiceStatus(userId: 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
+        DBrepository.getUser(user),
+        DBrepository.getServiceStatus(userId: user),
         // DBrepository.getUser(user!.id),
         // DBrepository.getServiceStatus(userId: user.id),
       ]),
