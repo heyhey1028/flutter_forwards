@@ -1,19 +1,15 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_forwards/models/user_sum.dart';
 import 'package:flutter_forwards/util/color.dart';
 
-class PersonalScore {
-  final double value;
-  final String userIconImageURL;
-
-  PersonalScore({required this.value, required this.userIconImageURL});
-}
-
 class RankingChart extends StatelessWidget {
-  const RankingChart({Key? key, required this.personalScores})
-      : super(key: key);
+  const RankingChart({
+    Key? key,
+    required this.userSums,
+  }) : super(key: key);
 
-  final List<PersonalScore> personalScores;
+  final List<UserSum> userSums;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +31,7 @@ class RankingChart extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(24.0),
                     child: Image.network(
-                      personalScores[index].userIconImageURL,
+                      userSums[index].userIconPath,
                     ),
                   ),
                 );
@@ -53,13 +49,13 @@ class RankingChart extends StatelessWidget {
           ),
         ),
         groupsSpace: 20,
-        barGroups: barGroups(personalScores),
+        barGroups: barGroups(userSums),
       ),
     );
   }
 
-  List<BarChartGroupData> barGroups(List<PersonalScore> scores) {
-    return scores
+  List<BarChartGroupData> barGroups(List<UserSum> sums) {
+    return sums
         .asMap()
         .map(
           (index, score) => MapEntry(
@@ -69,14 +65,14 @@ class RankingChart extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  toY: score.value,
+                  toY: score.sum.toDouble() / 100,
                   width: 48,
                   backDrawRodData: BackgroundBarChartRodData(
                     show: true,
                     toY: 1.0,
                     color: ColorUtil.colorFromHex('F0F5F0'),
                   ),
-                  color: barColor(score.value),
+                  color: barColor(score.sum.toDouble() / 100),
                 ),
               ],
             ),

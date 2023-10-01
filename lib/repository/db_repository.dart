@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_forwards/models/app_user.dart';
+import 'package:flutter_forwards/models/user_sum.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,6 +34,24 @@ class DBrepository {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final List<dynamic> list = data['data'];
       return list.map((e) => ServiceStatus.fromJson(e)).toList();
+    } catch (e) {
+      print('error: ${e.toString()}');
+      return [];
+    }
+  }
+
+  static Future<List<UserSum>> getUserSums() async {
+    final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co//functions/v1/sum-screen-times');
+    final requestHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $anonKey',
+    };
+    try {
+      final response = await http.get(uri, headers: requestHeader);
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      final List<dynamic> list = data['data'];
+      return list.map((e) => UserSum.fromJson(e)).toList();
     } catch (e) {
       print('error: ${e.toString()}');
       return [];
