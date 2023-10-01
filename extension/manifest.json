@@ -23,5 +23,10 @@
   "background": {
     "service_worker": "event.js"
   },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
   "manifest_version": 3
 }
