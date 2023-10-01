@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'total_sum.freezed.dart';
@@ -17,4 +15,3 @@ class TotalSum with _$TotalSum {
 
   factory TotalSum.fromJson(Map<String, dynamic> json) => _$TotalSumFromJson(json);
 }
-

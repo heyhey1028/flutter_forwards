@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_forwards/models/user_achievement.dart';
-import 'package:flutter_forwards/repository/db_repository.dart';
 import 'package:flutter_forwards/widgets/donut_chart.dart';
+import 'package:provider/provider.dart';
+
+import '../change_notifier.dart';
 
 class HomeMainContent extends StatelessWidget {
   const HomeMainContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userAchievement = context.select((HomePageChangeNotifier value) => value.uiState.userAchievements);
+
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(30),
@@ -28,19 +31,10 @@ class HomeMainContent extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            FutureBuilder(
-              future: DBrepository.getUserAchievement('c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
-              builder: (context, AsyncSnapshot<UserAchievement?> snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data;
-                  return AppDonutChart(
-                    amount: data!.monthlyTarget,
-                    value: data.totalServiceScreenTimes,
-                    color: Colors.white,
-                  );
-                }
-                return const SizedBox.shrink();
-              },
+            AppDonutChart(
+              amount: userAchievement!.monthlyTarget,
+              value: userAchievement.totalServiceScreenTimes,
+              color: Colors.white,
             ),
           ],
         ),
