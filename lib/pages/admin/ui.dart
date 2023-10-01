@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_forwards/util/color.dart';
 import 'package:flutter_forwards/util/double_extension.dart';
 import 'package:flutter_forwards/widgets/donut_chart.dart';
+import 'package:flutter_forwards/widgets/ranking_chart.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
@@ -13,11 +14,66 @@ class AdminPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin Page'),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            size: 32,
+          ),
+          onPressed: () async {},
+        ),
+        actions: [
+          const SearchBar(),
+          const SizedBox(
+            width: 24,
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.info,
+              size: 32,
+            ),
+            onPressed: () async {},
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.notifications_none,
+              size: 32,
+            ),
+            onPressed: () async {},
+          ),
+          const CircleAvatar(
+            backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg"),
+            radius: 16,
+            backgroundColor: Colors.transparent,
+          ),
+          const SizedBox(
+            width: 24,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 56,
+            ),
+            const Text(
+              "2023年10月1日",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              "英語スカウター事業本部　営業企画チーム",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -66,7 +122,20 @@ class AdminPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  width: 24,
+                ),
+                SizedBox(
+                  width: 1000,
+                  height: 326,
+                  child: RankingChart(
+                    personalScores: _dummy(),
+                  ),
+                ),
               ],
+            ),
+            const SizedBox(
+              height: 24,
             ),
             const Wrap(
               runSpacing: 24,
@@ -153,6 +222,59 @@ class AdminPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  static List<PersonalScore> _dummy() {
+    return [
+      PersonalScore(
+        value: 0.1,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.2,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.3,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.4,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.5,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.6,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.7,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.8,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.9,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 0.9,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 1.0,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+      PersonalScore(
+        value: 1.0,
+        userIconImageURL: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+      ),
+    ];
   }
 }
 
