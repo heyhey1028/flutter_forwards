@@ -51,7 +51,9 @@ class DBrepository {
       final response = await http.get(uri, headers: requestHeader);
       final Map<String, dynamic> data = jsonDecode(response.body);
       final List<dynamic> list = data['data'];
-      return list.map((e) => UserSum.fromJson(e)).toList();
+      final sums = list.map((e) => UserSum.fromJson(e)).toList();
+      sums.sort((a, b) => a.sum.compareTo(b.sum));
+      return sums;
     } catch (e) {
       print('error: ${e.toString()}');
       return [];

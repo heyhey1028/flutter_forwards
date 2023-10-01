@@ -65,14 +65,14 @@ class RankingChart extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  toY: score.sum.toDouble() / 100,
+                  toY: score.sum / score.monthlyTarget,
                   width: 48,
                   backDrawRodData: BackgroundBarChartRodData(
                     show: true,
                     toY: 1.0,
                     color: ColorUtil.colorFromHex('F0F5F0'),
                   ),
-                  color: barColor(score.sum.toDouble() / 100),
+                  color: barColor(score.sum / score.monthlyTarget),
                 ),
               ],
             ),
