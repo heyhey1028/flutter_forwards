@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_forwards/pages/signup/ui.dart';
+import 'package:flutter_forwards/pages/home/ui.dart';
+import 'package:flutter_forwards/util/app_http_overrides.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -8,7 +11,7 @@ Future<void> main() async {
   await dotenv.load(fileName: '.env');
   final String anonKey = dotenv.env['SUPABASE_ANON'] ?? ''; // Anon keyを.envから取得
   final String projectUrl = dotenv.env['SUPABASE_URL'] ?? ''; // URLを.envから取得
-
+  HttpOverrides.global = AppHttpOverrides();
   await Supabase.initialize(
     anonKey: anonKey, // プロジェクトAnon key
     url: projectUrl, // プロジェクトURL
@@ -24,10 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: const SignupPage(),
+      home: const HomePage(),
     );
   }
 }

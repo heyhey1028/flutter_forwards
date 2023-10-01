@@ -22,6 +22,21 @@ class _SignupPageState extends State<SignupPage> {
   final bool _isLoading = false;
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final user = AuthRepository.user;
+      if (user != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      }
+    });
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
