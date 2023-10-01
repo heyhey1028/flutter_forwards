@@ -17,10 +17,10 @@ class HomePage extends StatelessWidget {
 
     return FutureBuilder(
       future: Future.wait([
-        // DBrepository.getUser('c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
-        // DBrepository.getServiceStatus(userId: 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
-        DBrepository.getUser(user!.id),
-        DBrepository.getServiceStatus(userId: user.id),
+        DBrepository.getUser('c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
+        DBrepository.getServiceStatus(userId: 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7'),
+        // DBrepository.getUser(user!.id),
+        // DBrepository.getServiceStatus(userId: user.id),
       ]),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {

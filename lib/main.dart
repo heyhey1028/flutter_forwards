@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_forwards/pages/home/ui.dart';
+import 'package:flutter_forwards/pages/signup/ui.dart';
 import 'package:flutter_forwards/util/app_http_overrides.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: textTheme,
       ),
-      home: const HomePage(),
+      home: const SignupPage(),
     );
   }
 }

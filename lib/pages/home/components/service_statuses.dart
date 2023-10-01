@@ -91,7 +91,7 @@ class ServiceStatusWidget extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            '${serviceStatus.sum}時間',
+            '${serviceStatus.sum}分',
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
