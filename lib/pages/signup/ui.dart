@@ -55,9 +55,9 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Create your account',
+                  'これからよろしくお願いします',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

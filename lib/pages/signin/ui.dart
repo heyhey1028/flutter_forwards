@@ -37,7 +37,7 @@ class _SigninPageState extends State<SigninPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Welcom back',
+                  'おかえりなさい',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,

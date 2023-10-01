@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_forwards/repository/auth_repository.dart';
 import 'package:intl/intl.dart';
 
 import '../../../models/app_user.dart';
+import '../../signin/ui.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -25,7 +27,15 @@ class HomeHeader extends StatelessWidget {
               Icons.settings,
               size: 32,
             ),
-            onPressed: () async {},
+            onPressed: () async {
+              await AuthRepository.signOut().whenComplete(() {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const SigninPage(),
+                  ),
+                );
+              });
+            },
           ),
           Expanded(
             child: Row(

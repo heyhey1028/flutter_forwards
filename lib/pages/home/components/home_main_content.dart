@@ -33,9 +33,9 @@ class HomeMainContent extends StatelessWidget {
               builder: (context, AsyncSnapshot<UserAchievement?> snapshot) {
                 if (snapshot.hasData) {
                   final data = snapshot.data;
-                  return const AppDonutChart(
-                    amount: 100,
-                    value: 80,
+                  return AppDonutChart(
+                    amount: data!.monthlyTarget,
+                    value: data.totalServiceScreenTimes,
                     color: Colors.white,
                   );
                 }

@@ -26,7 +26,7 @@ class AppButton extends StatelessWidget {
         // ボタンのスタイル
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: Colors.green,
+          backgroundColor: const Color(0xFF32C864),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
