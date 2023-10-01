@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_forwards/models/app_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -21,10 +22,11 @@ class DBrepository {
   }
 
   static Future<List<ServiceStatus>> getServiceStatus({required String userId}) async {
+    final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
     final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/sum-service-screen-times?user_id=$userId');
     final requestHeader = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1eXNzbmJsYWxhY25mdG9kaG1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU1MzczMzcsImV4cCI6MjAxMTExMzMzN30.K6IoFgvC3HJV0NcaUUoY-SuLIX1Hm1R0EEhvR2C2l50',
+      'Authorization': 'Bearer $anonKey',
     };
     try {
       final response = await http.get(uri, headers: requestHeader);
