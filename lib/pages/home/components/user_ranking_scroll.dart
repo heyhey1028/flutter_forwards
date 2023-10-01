@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_forwards/widgets/ranking_chart.dart';
+import 'package:provider/provider.dart';
 
-import '../../../repository/db_repository.dart';
+import '../change_notifier.dart';
 
 class UserRankingScroll extends StatefulWidget {
   const UserRankingScroll({super.key});
@@ -13,6 +14,8 @@ class UserRankingScroll extends StatefulWidget {
 class _UserRankingScrollState extends State<UserRankingScroll> {
   @override
   Widget build(BuildContext context) {
+    final userSums = context.select((HomePageChangeNotifier value) => value.uiState.userSums);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
@@ -34,25 +37,17 @@ class _UserRankingScrollState extends State<UserRankingScroll> {
             color: Colors.grey,
           ),
           const SizedBox(height: 16),
-          FutureBuilder(
-            future: DBrepository.getUserSums(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SizedBox(
-                  height: 200,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      SizedBox(
-                        width: 800,
-                        child: RankingChart(userSums: snapshot.data!),
-                      ),
-                    ],
-                  ),
-                );
-              }
-              return const SizedBox.shrink();
-            },
+          SizedBox(
+            height: 200,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                SizedBox(
+                  width: 800,
+                  child: RankingChart(userSums: userSums),
+                ),
+              ],
+            ),
           ),
         ],
       ),

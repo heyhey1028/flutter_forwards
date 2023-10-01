@@ -12,12 +12,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const user = 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7';
+    const userId = 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7';
 
     return FutureBuilder(
       future: Future.wait([
-        DBrepository.getUser(user),
-        DBrepository.getServiceStatus(userId: user),
+        DBrepository.getUser(userId),
+        DBrepository.getServiceStatus(userId: userId),
+        DBrepository.getUserAchievement(userId),
+        DBrepository.getUserSums(),
         // DBrepository.getUser(user!.id),
         // DBrepository.getServiceStatus(userId: user.id),
       ]),
@@ -35,6 +37,8 @@ class HomePage extends StatelessWidget {
             create: (context) => HomePageChangeNotifier(
               user: snapshot.data![0],
               serviceStatuses: snapshot.data![1],
+              userAchievements: snapshot.data![2],
+              userSums: snapshot.data![3],
             )..initialize(),
             child: const HomePageView(),
           );
@@ -59,21 +63,26 @@ class HomePageView extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            HomeHeader(user: user),
-            const Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    HomeMainContent(),
-                    HomeSubContent(),
-                  ],
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await context.read<HomePageChangeNotifier>().refresh(user.id);
+          },
+          child: Column(
+            children: [
+              HomeHeader(user: user),
+              const Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      HomeMainContent(),
+                      HomeSubContent(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

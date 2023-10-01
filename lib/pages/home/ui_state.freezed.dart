@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomePageUiState {
   AppUser get user => throw _privateConstructorUsedError;
   List<ServiceStatus> get serviceStatuses => throw _privateConstructorUsedError;
+  UserAchievement? get userAchievements => throw _privateConstructorUsedError;
+  List<UserSum> get userSums => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomePageUiStateCopyWith<HomePageUiState> get copyWith =>
@@ -30,9 +32,14 @@ abstract class $HomePageUiStateCopyWith<$Res> {
           HomePageUiState value, $Res Function(HomePageUiState) then) =
       _$HomePageUiStateCopyWithImpl<$Res, HomePageUiState>;
   @useResult
-  $Res call({AppUser user, List<ServiceStatus> serviceStatuses});
+  $Res call(
+      {AppUser user,
+      List<ServiceStatus> serviceStatuses,
+      UserAchievement? userAchievements,
+      List<UserSum> userSums});
 
   $AppUserCopyWith<$Res> get user;
+  $UserAchievementCopyWith<$Res>? get userAchievements;
 }
 
 /// @nodoc
@@ -50,6 +57,8 @@ class _$HomePageUiStateCopyWithImpl<$Res, $Val extends HomePageUiState>
   $Res call({
     Object? user = null,
     Object? serviceStatuses = null,
+    Object? userAchievements = freezed,
+    Object? userSums = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -60,6 +69,14 @@ class _$HomePageUiStateCopyWithImpl<$Res, $Val extends HomePageUiState>
           ? _value.serviceStatuses
           : serviceStatuses // ignore: cast_nullable_to_non_nullable
               as List<ServiceStatus>,
+      userAchievements: freezed == userAchievements
+          ? _value.userAchievements
+          : userAchievements // ignore: cast_nullable_to_non_nullable
+              as UserAchievement?,
+      userSums: null == userSums
+          ? _value.userSums
+          : userSums // ignore: cast_nullable_to_non_nullable
+              as List<UserSum>,
     ) as $Val);
   }
 
@@ -68,6 +85,18 @@ class _$HomePageUiStateCopyWithImpl<$Res, $Val extends HomePageUiState>
   $AppUserCopyWith<$Res> get user {
     return $AppUserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserAchievementCopyWith<$Res>? get userAchievements {
+    if (_value.userAchievements == null) {
+      return null;
+    }
+
+    return $UserAchievementCopyWith<$Res>(_value.userAchievements!, (value) {
+      return _then(_value.copyWith(userAchievements: value) as $Val);
     });
   }
 }
@@ -80,10 +109,16 @@ abstract class _$$HomePageUiStateImplCopyWith<$Res>
       __$$HomePageUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppUser user, List<ServiceStatus> serviceStatuses});
+  $Res call(
+      {AppUser user,
+      List<ServiceStatus> serviceStatuses,
+      UserAchievement? userAchievements,
+      List<UserSum> userSums});
 
   @override
   $AppUserCopyWith<$Res> get user;
+  @override
+  $UserAchievementCopyWith<$Res>? get userAchievements;
 }
 
 /// @nodoc
@@ -99,6 +134,8 @@ class __$$HomePageUiStateImplCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
     Object? serviceStatuses = null,
+    Object? userAchievements = freezed,
+    Object? userSums = null,
   }) {
     return _then(_$HomePageUiStateImpl(
       user: null == user
@@ -109,6 +146,14 @@ class __$$HomePageUiStateImplCopyWithImpl<$Res>
           ? _value._serviceStatuses
           : serviceStatuses // ignore: cast_nullable_to_non_nullable
               as List<ServiceStatus>,
+      userAchievements: freezed == userAchievements
+          ? _value.userAchievements
+          : userAchievements // ignore: cast_nullable_to_non_nullable
+              as UserAchievement?,
+      userSums: null == userSums
+          ? _value._userSums
+          : userSums // ignore: cast_nullable_to_non_nullable
+              as List<UserSum>,
     ));
   }
 }
@@ -118,8 +163,11 @@ class __$$HomePageUiStateImplCopyWithImpl<$Res>
 class _$HomePageUiStateImpl implements _HomePageUiState {
   const _$HomePageUiStateImpl(
       {required this.user,
-      final List<ServiceStatus> serviceStatuses = const []})
-      : _serviceStatuses = serviceStatuses;
+      final List<ServiceStatus> serviceStatuses = const [],
+      this.userAchievements,
+      final List<UserSum> userSums = const []})
+      : _serviceStatuses = serviceStatuses,
+        _userSums = userSums;
 
   @override
   final AppUser user;
@@ -133,8 +181,19 @@ class _$HomePageUiStateImpl implements _HomePageUiState {
   }
 
   @override
+  final UserAchievement? userAchievements;
+  final List<UserSum> _userSums;
+  @override
+  @JsonKey()
+  List<UserSum> get userSums {
+    if (_userSums is EqualUnmodifiableListView) return _userSums;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userSums);
+  }
+
+  @override
   String toString() {
-    return 'HomePageUiState(user: $user, serviceStatuses: $serviceStatuses)';
+    return 'HomePageUiState(user: $user, serviceStatuses: $serviceStatuses, userAchievements: $userAchievements, userSums: $userSums)';
   }
 
   @override
@@ -144,12 +203,19 @@ class _$HomePageUiStateImpl implements _HomePageUiState {
             other is _$HomePageUiStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
-                .equals(other._serviceStatuses, _serviceStatuses));
+                .equals(other._serviceStatuses, _serviceStatuses) &&
+            (identical(other.userAchievements, userAchievements) ||
+                other.userAchievements == userAchievements) &&
+            const DeepCollectionEquality().equals(other._userSums, _userSums));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(_serviceStatuses));
+      runtimeType,
+      user,
+      const DeepCollectionEquality().hash(_serviceStatuses),
+      userAchievements,
+      const DeepCollectionEquality().hash(_userSums));
 
   @JsonKey(ignore: true)
   @override
@@ -162,12 +228,18 @@ class _$HomePageUiStateImpl implements _HomePageUiState {
 abstract class _HomePageUiState implements HomePageUiState {
   const factory _HomePageUiState(
       {required final AppUser user,
-      final List<ServiceStatus> serviceStatuses}) = _$HomePageUiStateImpl;
+      final List<ServiceStatus> serviceStatuses,
+      final UserAchievement? userAchievements,
+      final List<UserSum> userSums}) = _$HomePageUiStateImpl;
 
   @override
   AppUser get user;
   @override
   List<ServiceStatus> get serviceStatuses;
+  @override
+  UserAchievement? get userAchievements;
+  @override
+  List<UserSum> get userSums;
   @override
   @JsonKey(ignore: true)
   _$$HomePageUiStateImplCopyWith<_$HomePageUiStateImpl> get copyWith =>
