@@ -57,9 +57,9 @@ class AdminPage extends StatelessWidget {
                   ],
                 ),
                 actions: [
-                  SizedBox(
+                  const SizedBox(
                     height: 32,
-                    child: const SearchBar(
+                    child: SearchBar(
                       hintText: "ユーザー検索",
                     ),
                   ),

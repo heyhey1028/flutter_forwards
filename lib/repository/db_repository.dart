@@ -48,7 +48,7 @@ class DBrepository {
 
   static Future<List<UserSum>> getUserSums() async {
     final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
-    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co//functions/v1/sum-screen-times');
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/sum-screen-times');
     final requestHeader = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $anonKey',
@@ -70,7 +70,7 @@ class DBrepository {
 
   static Future<TotalSum?> getTotalSums() async {
     final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
-    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co//functions/v1/total-screen-times');
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/total-screen-times');
     final requestHeader = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $anonKey',
