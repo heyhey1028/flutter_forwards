@@ -3,7 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthRepository {
   static final _instance = Supabase.instance.client.auth;
 
-  static get user => _instance.currentUser;
+  static User? get user => _instance.currentUser;
 
   static Future<bool> login({
     required String email,
