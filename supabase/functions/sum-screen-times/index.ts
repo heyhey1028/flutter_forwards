@@ -26,7 +26,7 @@ serve(async (req: Request) => {
       { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
     )
     // And we can run queries in the context of our authenticated user
-    const { data, error } = await supabaseClient.from('user_screeen_times').select('*')
+    const { data, error } = await supabaseClient.from('user_screen_times').select('*')
     if (error) throw error
 
     return new Response(JSON.stringify({ data }), {
