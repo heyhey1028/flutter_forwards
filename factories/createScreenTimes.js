@@ -36,7 +36,8 @@ userIds.forEach(async (userId, index) => {
                 "73c89c17-a35e-40bc-a399-748604e31b98" : // abceed
                 '6a4e5692-33da-4801-a7cd-ebaf26decdf5' // native camp
 
-            const screenTime = Math.floor(Math.random() * 30) + 30
+            const screenTime = Math.floor(Math.random() * 10) + 50
+            // const screenTime = 60
             saveScreenTime({
                 "user_id": userId,
                 "date": `2023/09/${day}`,

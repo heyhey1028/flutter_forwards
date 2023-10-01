@@ -15,8 +15,13 @@
   "permissions": [
     "activeTab",
     "storage",
+    "contextMenus",
+    "scripting",
     "https://app.abceed.com/analysis/timeBook/ask_deru1000",
     "https://nativecamp.net/lesson-history"
   ],
+  "background": {
+    "service_worker": "event.js"
+  },
   "manifest_version": 3
 }
