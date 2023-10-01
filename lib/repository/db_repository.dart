@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_forwards/models/app_user.dart';
+import 'package:flutter_forwards/models/user_achievement.dart';
 import 'package:flutter_forwards/models/user_sum.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -40,9 +42,28 @@ class DBrepository {
     }
   }
 
+  static Future<UserAchievement?> getUserAchievement(String userId) async {
+    final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/total-service-screen-times?user_id=$userId');
+    final requestHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $anonKey',
+    };
+    try {
+      final response = await http.get(uri, headers: requestHeader);
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      final List<dynamic> list = data['data'];
+      return UserAchievement.fromJson(list.first);
+    } catch (e) {
+      if (kDebugMode) {}
+      print('error: ${e.toString()}');
+    }
+    return null;
+  }
+
   static Future<List<UserSum>> getUserSums() async {
     final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
-    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co//functions/v1/sum-screen-times');
+    final uri = Uri.parse('https://auyssnblalacnftodhmf.supabase.co/functions/v1/sum-screen-times');
     final requestHeader = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $anonKey',
