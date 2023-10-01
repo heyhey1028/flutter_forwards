@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_forwards/pages/home/change_notifier.dart';
 import 'package:flutter_forwards/pages/home/components/home_main_content.dart';
@@ -13,7 +12,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const user = kIsWeb ? 'ecd32456-6527-4ef1-add2-39ba9e14e66b' : 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7';
+    const user = 'c5ef7315-ee00-42f0-b942-b4a92a1aaba7';
 
     return FutureBuilder(
       future: Future.wait([
