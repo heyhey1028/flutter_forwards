@@ -40,17 +40,28 @@ class AdminPage extends StatelessWidget {
             create: (context) => AdminPageChangeNotifier(),
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('Admin Page'),
-                leading: IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                    size: 32,
-                  ),
-                  onPressed: () async {},
+                title: Image.asset(
+                  "assets/images/ManabiForwardWe.png",
+                  width: 250,
+                  height: 36,
+                ),
+                leading: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.menu,
+                        size: 32,
+                      ),
+                      onPressed: () async {},
+                    ),
+                  ],
                 ),
                 actions: [
-                  const SearchBar(
-                    hintText: "ユーザー検索",
+                  SizedBox(
+                    height: 32,
+                    child: const SearchBar(
+                      hintText: "ユーザー検索",
+                    ),
                   ),
                   const SizedBox(
                     width: 24,
