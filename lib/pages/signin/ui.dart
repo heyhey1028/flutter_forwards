@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_forwards/pages/admin/ui.dart';
 import 'package:flutter_forwards/pages/home/ui.dart';
 import 'package:flutter_forwards/pages/signup/ui.dart';
 import 'package:flutter_forwards/repository/auth_repository.dart';
@@ -86,12 +88,19 @@ class _SigninPageState extends State<SigninPage> {
                     );
 
                     if (!result || !mounted) return;
-
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                    if (kIsWeb) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const AdminPage(),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
                   },
                   text: 'Continue',
                 ),

@@ -6,6 +6,7 @@ import 'package:flutter_forwards/repository/auth_repository.dart';
 
 import '../../widgets/app_button.dart';
 import '../../widgets/app_text_form_field.dart';
+import '../admin/ui.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -125,11 +126,19 @@ class _SignupPageState extends State<SignupPage> {
                     // この時点で画面が破棄されている場合、処理を中断
                     if (!mounted) return;
 
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                    if (kIsWeb) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const AdminPage(),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
                   },
                   text: 'Continue',
                 ),
