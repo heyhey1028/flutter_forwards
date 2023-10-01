@@ -43,7 +43,7 @@ function fetchNativeCamp() {
       fetch(url, {method, headers, body}).then((res)=> res).then(console.log).catch(console.error);
   }
 
-  const regex = /^https:\/\/nativecamp\.net\/lesson-history\?month=\d{6}$/;
+  const regex = /^https:\/\/nativecamp\.net\/lesson-history/g;
 
   if(document.location.href.match(regex)) {
   // if(document.location.href === 'https://app.abceed.com/') {
