@@ -1,13 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_forwards/models/total_sum.dart';
 import 'package:flutter_forwards/repository/db_repository.dart';
 import 'package:flutter_forwards/util/color.dart';
 import 'package:flutter_forwards/util/double_extension.dart';
 import 'package:flutter_forwards/widgets/donut_chart.dart';
 import 'package:flutter_forwards/widgets/ranking_chart.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../models/user_sum.dart';
@@ -18,18 +17,10 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rootPath = dotenv.env['SUPABASE_URL'] ?? "";
-    final String anonKey = dotenv.env['SUPABASE_ANON'] ?? '';
-    final uriForSum = Uri.parse("$rootPath/functions/v1/sum-screen-times");
-    final uriForTotal = Uri.parse("${rootPath}functions/v1/total-screen-times");
-    final requestHeader = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $anonKey',
-    };
-
     return FutureBuilder(
       future: Future.wait([
         DBrepository.getUserSums(),
+        DBrepository.getTotalSums(),
       ]),
       builder: (context, AsyncSnapshot snapshot) {
         debugPrint(snapshot.toString());
@@ -44,6 +35,7 @@ class AdminPage extends StatelessWidget {
 
         if (snapshot.hasData) {
           final List<UserSum> userSumList = snapshot.data[0]!;
+          final TotalSum totalSum = snapshot.data[1]!;
           return ChangeNotifierProvider(
             create: (context) => AdminPageChangeNotifier(),
             child: Scaffold(
@@ -57,7 +49,9 @@ class AdminPage extends StatelessWidget {
                   onPressed: () async {},
                 ),
                 actions: [
-                  const SearchBar(),
+                  const SearchBar(
+                    hintText: "ユーザー検索",
+                  ),
                   const SizedBox(
                     width: 24,
                   ),
@@ -118,16 +112,16 @@ class AdminPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             color: ColorUtil.colorFromHex("32C864"),
                           ),
-                          child: const SizedBox(
+                          child: SizedBox(
                             width: 326,
                             height: 326,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
-                                Text(
+                                const Text(
                                   "チームスコア",
                                   style: TextStyle(
                                     color: Colors.white,
@@ -138,20 +132,20 @@ class AdminPage extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     AppDonutChart(
-                                      amount: 100,
-                                      value: 80,
+                                      amount: totalSum.monthlyTarget * totalSum.teamMemberCount,
+                                      value: totalSum.totalTeamScreenTimes,
                                       color: Colors.white,
                                     ),
                                   ],
                                 ),
-                                Text(
+                                const Text(
                                   "とてもいい状態ですね！",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                               ],
@@ -173,85 +167,17 @@ class AdminPage extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const Wrap(
+                    Wrap(
                       runSpacing: 24,
                       spacing: 24,
                       children: [
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.1,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.2,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.3,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.4,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.5,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.6,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.7,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.8,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 0.9,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.0,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.1,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.2,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.3,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.4,
-                        ),
-                        _IndividualCard(
-                          name: "ぼたもち",
-                          progressText: "55時間",
-                          achievementRatio: 1.5,
-                        ),
+                        ...userSumList.map((e) {
+                          return _IndividualCard(
+                              name: e.userName,
+                              progressText: "${e.sum}分",
+                              achievementRatio: (e.sum / e.monthlyTarget),
+                              iconUrl: e.userIconPath);
+                        }).toList(),
                       ],
                     ),
                   ],
@@ -264,27 +190,16 @@ class AdminPage extends StatelessWidget {
       },
     );
   }
-
-  static List<UserSum> _dummy() {
-    return [
-      UserSum(
-        userId: "0",
-        userName: "ぼたもち",
-        userIconPath: "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
-        teamId: "0",
-        monthlyTarget: 100,
-        sum: 10,
-      ),
-    ];
-  }
 }
 
 class _IndividualCard extends StatelessWidget {
-  const _IndividualCard({required this.name, required this.progressText, required this.achievementRatio});
+  const _IndividualCard(
+      {required this.name, required this.progressText, required this.achievementRatio, required this.iconUrl});
 
   final String name;
   final String progressText;
   final double achievementRatio;
+  final String iconUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -308,7 +223,7 @@ class _IndividualCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Image.network(
-                  "https://upload.wikimedia.org/wikipedia/commons/1/1f/Ohagi_Botamochi.jpg",
+                  iconUrl,
                   height: 66,
                   width: 66,
                 ),
@@ -327,7 +242,7 @@ class _IndividualCard extends StatelessWidget {
             Positioned(
               left: 96,
               top: 48,
-              bottom: 0,
+              bottom: 16,
               width: 200,
               child: Container(
                 decoration: BoxDecoration(
@@ -340,7 +255,7 @@ class _IndividualCard extends StatelessWidget {
               left: 96,
               top: 48,
               width: min(200 * achievementRatio, 200),
-              bottom: 0,
+              bottom: 16,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

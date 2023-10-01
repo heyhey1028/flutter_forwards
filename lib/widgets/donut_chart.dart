@@ -22,7 +22,7 @@ class AppDonutChart extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  "$value",
+                  (value.toDouble()/amount.toDouble()*100.0.clamp(0, 100)).toStringAsFixed(1),
                   style: const TextStyle(
                       fontSize: 60,
                       color: Colors.white,
